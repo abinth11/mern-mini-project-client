@@ -1,0 +1,44 @@
+{
+  "name": "react-food-app",
+  "version": "1.0.0",
+  "description": "this is a basic react app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abinth11/react-food-app.git"
+  },
+  "author": "abin t h",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abinth11/react-food-app/issues"
+  },
+  "homepage": "https://github.com/abinth11/react-food-app#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "eslint": "^8.39.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.11.1",
+    "react-shimmer": "^3.2.0"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions"
+  ]
+}
