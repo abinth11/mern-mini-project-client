@@ -40,7 +40,6 @@ const Login = () => {
             }
         }).then(async response => {
             const parsedResponse = await response.json()
-            console.log(parsedResponse)
             const { data } = parsedResponse
             if (!data?.status) {
                 setErrMsg(data?.Message)

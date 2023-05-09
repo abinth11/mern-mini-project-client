@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { logoImageUrl } from "../constants";
 import filterData from "../Helpers/filterAlgorithm";
+import { useSelector,useDispatch } from "react-redux";
+import { setFilteredRestaurants } from '../features/filteredRestaurants';
 import { Link } from "react-router-dom";
 const logo = (
   <div className="logo">
     <img src={logoImageUrl} alt="logo" />
   </div>
 );
-const Header = ({ searchText, setSearchText, restaurant, setRestaurant, allRestaurant, }) => {
+const Header = () => {
+  const [searchText,setSearch] = useState("")
+  const dispatch = useDispatch()
+  const restaurants = useSelector((state) => state?.restaurantReducer?.restaurants);
   return (
     <div className="header">
       <a href="/"> {logo}</a>
@@ -17,8 +22,9 @@ const Header = ({ searchText, setSearchText, restaurant, setRestaurant, allResta
             placeholder="Search..."
             value={searchText}
             onChange={e => {
-              setSearchText(e.target.value)
-              filterData(searchText, restaurant, setRestaurant, allRestaurant,)
+              setSearch(e.target.value)
+              filterData(searchText,restaurants,dispatch,setFilteredRestaurants)
+
             }}
           />
         </li>

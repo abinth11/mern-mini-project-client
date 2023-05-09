@@ -1,8 +1,10 @@
-const filterData = (searchText,data,setData,allData) => {
-    const filteredData = allData.filter((item) => {
+
+const filterData = (searchText,restaurants,dispatch,setFilteredRestaurants) => {
+  console.log(searchText)
+    const filteredData = restaurants.filter((item) => {
       return item.data.name.toLowerCase().trim().includes(searchText.toLowerCase().trim())
     })
-    setData(filteredData)
+    dispatch(setFilteredRestaurants(filteredData))
   }
   export default filterData
 

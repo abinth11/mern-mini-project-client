@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import Body from './components/Body';
@@ -8,51 +8,31 @@ import {
   createBrowserRouter,
   Outlet,
 } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
 import ErrorElement from './components/ErrorElement';
 import About from './components/Offers';
 import Contact from './components/Help';
 import Cart from './components/Cart';
-import PopupExample from './components/popup';
 import Login from './components/SignIn';
 import SignUp from './components/SignUp';
 import ViewRestaurant from './components/ViewRestaurant';
-
-export const MyContext = createContext()
-
-const AppLayout = () => {
-  useEffect(() => {
-    getRestaurants()
-  }, [])
-  const [allRestaurants, setAllRestaurants] = useState([])
-  const [filteredRestaurant, setFilteredRestaurant] = useState([])
-  const [searchText, setSearchText] = useState("")
-  const [isLoading, setIsLoading] = useState(true)
-
-  const getRestaurants = async () => {
-    try {
-      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=9.927532&lng=76.2638427&page_type=DESKTOP_WEB_LISTING")
-      const parsedJson = await data.json()
-      setFilteredRestaurant(parsedJson?.data?.cards[2]?.data?.data?.cards)
-      setAllRestaurants(parsedJson?.data?.cards[2]?.data?.data?.cards)
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 2000)
-    } catch (error) {
-      // console.log(error)
-      // alert('something went wrong..')
-    }
+import restaurantReducer from './features/restaurants.js'
+import filteredRestaurantReducer from './features/filteredRestaurants'
+import { Provider } from 'react-redux';
+const store = configureStore({
+  reducer: {
+    restaurantReducer,
+    filteredRestaurantReducer
   }
+})
+const AppLayout = () => {
 
   return (
     <>
-      <Header searchText={searchText}
-        setSearchText={setSearchText}
-        restaurant={filteredRestaurant}
-        setRestaurant={setFilteredRestaurant}
-        allRestaurant={allRestaurants} />
-      <MyContext.Provider value={{ restaurant: filteredRestaurant, allRestaurants, isLoading }}>
+      <Provider store={store}>
+        <Header />
         <Outlet />
-      </MyContext.Provider>
+      </Provider>
       <Footer />
     </>
   )
@@ -72,24 +52,24 @@ const AppRouter = createBrowserRouter([{
       element: <About />
     },
     {
-      path:'/help',
-      element:<Contact/>
+      path: '/help',
+      element: <Contact />
     },
     {
-      path:'/login',
-      element:<Login/>,
+      path: '/login',
+      element: <Login />,
     },
     {
-      path:'sign-up',
-      element:<SignUp/>
+      path: 'sign-up',
+      element: <SignUp />
     },
     {
-      path:'/Cart',
-      element:<PopupExample/>
+      path: '/Cart',
+      element: <Cart />
     },
     {
-      path:'/view-restaurant/:resId',
-      element:<ViewRestaurant/>
+      path: '/view-restaurant/:resId',
+      element: <ViewRestaurant />
     }
   ]
 }])
