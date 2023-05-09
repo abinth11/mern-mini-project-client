@@ -76,3 +76,7 @@
   .form-actions > button:hover {
     background-color: #0066cc;
   }
+  .error{
+    color: rgb(255, 119, 119);
+    text-align: center;
+  }

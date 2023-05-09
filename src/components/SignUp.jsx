@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 import './SignUp.css';
 
@@ -35,7 +35,6 @@ const SignUp = () => {
         //     return;
         // }
 
-        // make API call using fetch
         fetch('http://localhost:3000/user-register', {
             method: 'POST',
             body: JSON.stringify(formData),
@@ -116,7 +115,7 @@ const SignUp = () => {
                     </div>
                 </div>
                 <div className="form-actions">
-                    <button type="submit">Sign Up</button>
+                <p className="signup-link">Already have an account? <Link to="/login">Log in</Link></p>
                 </div>
             </form>
         </div>

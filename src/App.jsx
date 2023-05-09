@@ -12,6 +12,7 @@ import ErrorElement from './components/ErrorElement';
 import About from './components/Offers';
 import Contact from './components/Help';
 import Cart from './components/Cart';
+import PopupExample from './components/popup';
 import Login from './components/SignIn';
 import SignUp from './components/SignUp';
 import ViewRestaurant from './components/ViewRestaurant';
@@ -84,7 +85,7 @@ const AppRouter = createBrowserRouter([{
     },
     {
       path:'/Cart',
-      element:<Cart/>
+      element:<PopupExample/>
     },
     {
       path:'/view-restaurant/:resId',
