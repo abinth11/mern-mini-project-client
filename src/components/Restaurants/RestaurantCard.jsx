@@ -1,5 +1,5 @@
 import React from 'react';
-import { restaurantImageUrl } from '../constants';
+import { restaurantImageUrl } from '../../constants';
 const RestaurantCard = ({
   name,
   cuisines,

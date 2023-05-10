@@ -1,7 +1,9 @@
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 import "./Login.css";
+import { setToken } from "../../features/authSlice";
 
 const Login = () => {
     const [username, setUserName] = useState('')
@@ -10,6 +12,7 @@ const Login = () => {
     const [err, showErr] = useState(true)
     const [errMsg, setErrMsg] = useState()
     const navigate = useNavigate()
+    const dispatch = useDispatch();
     useEffect(() => {
         if (err) {
             var timerId = setTimeout(() => {
@@ -45,6 +48,8 @@ const Login = () => {
                 setErrMsg(data?.Message)
                 showErr(true)
             } else {
+                dispatch(setToken(data?.accessToken))
+                localStorage.setItem('accessToken',data?.accessToken)
                 navigate('/')
             }
             console.log(parsedResponse)

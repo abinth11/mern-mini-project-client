@@ -10,23 +10,26 @@ import {
 } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import ErrorElement from './components/ErrorElement';
-import About from './components/Offers';
-import Contact from './components/Help';
-import Cart from './components/Cart';
-import Login from './components/SignIn';
-import SignUp from './components/SignUp';
-import ViewRestaurant from './components/ViewRestaurant';
+import About from './components/User/Offers';
+import Contact from './components/User/Help';
+import Cart from './components/User/Cart';
+import Login from './components/User/SignIn';
+import SignUp from './components/User/SignUp';
+import ViewRestaurant from './components/Restaurants/ViewRestaurant';
 import restaurantReducer from './features/restaurants.js'
 import filteredRestaurantReducer from './features/filteredRestaurants'
+import ViewProfile from './components/Profile/viewProfile';
 import { Provider } from 'react-redux';
+import authReducer from './features/authSlice';
+
 const store = configureStore({
   reducer: {
     restaurantReducer,
-    filteredRestaurantReducer
+    filteredRestaurantReducer,
+    authReducer
   }
 })
 const AppLayout = () => {
-
   return (
     <>
       <Provider store={store}>
@@ -37,7 +40,6 @@ const AppLayout = () => {
     </>
   )
 }
-
 const AppRouter = createBrowserRouter([{
   path: '/',
   element: <AppLayout />,
@@ -64,6 +66,10 @@ const AppRouter = createBrowserRouter([{
       element: <SignUp />
     },
     {
+      path:'view-profile',
+      element:<ViewProfile/>
+    },
+    {
       path: '/Cart',
       element: <Cart />
     },
@@ -73,7 +79,5 @@ const AppRouter = createBrowserRouter([{
     }
   ]
 }])
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={AppRouter} />);
+root.render(<RouterProvider router={AppRouter} />)

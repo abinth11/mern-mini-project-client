@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { logoImageUrl } from "../constants";
 import filterData from "../Helpers/filterAlgorithm";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setFilteredRestaurants } from '../features/filteredRestaurants';
 import { Link } from "react-router-dom";
+import UserProfile from "./Profile/userProfile";
 const logo = (
   <div className="logo">
     <img src={logoImageUrl} alt="logo" />
   </div>
 );
 const Header = () => {
-  const [searchText,setSearch] = useState("")
+  const [searchText, setSearch] = useState("")
   const dispatch = useDispatch()
   const restaurants = useSelector((state) => state?.restaurantReducer?.restaurants);
+  const token = useSelector((state) => state?.authReducer);
   return (
     <div className="header">
       <a href="/"> {logo}</a>
@@ -23,7 +25,7 @@ const Header = () => {
             value={searchText}
             onChange={e => {
               setSearch(e.target.value)
-              filterData(searchText,restaurants,dispatch,setFilteredRestaurants)
+              filterData(searchText, restaurants, dispatch, setFilteredRestaurants)
 
             }}
           />
@@ -34,9 +36,13 @@ const Header = () => {
         <li>
           <Link className="nav-link" to='/help'>Help</Link>
         </li>
-        <li>
-          <Link className="nav-link" to='/login'>Sign In</Link>
-        </li>
+        {
+          token ?
+          <li><UserProfile/></li>
+            : <li> 
+              <Link className="nav-link" to='/login'>Sign In</Link>
+            </li>
+        }
         <li>
           <Link className="nav-link" to='/cart'>Cart</Link>
         </li>
