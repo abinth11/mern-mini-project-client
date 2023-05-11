@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AdminLogin from "./Login";
-const AdminBody = ()=>{
+import Dashboard from "./Dashboard";
+const AdminBody = () => {
     // const [isLoggedIn,setIsLoggedIn] = useState(false)
-    const isLoggedIn = useSelector((state) => state?.adminLoggedInReducer?.isLoggedIn);
-    console.log(isLoggedIn)
+    // const isLoggedIn = useSelector((state) => state?.adminLoggedInReducer?.isLoggedIn);
+    // console.log(isLoggedIn)
+    const isLoggedIn = true
     return (
-        <div className="admin-body" >
+        <>
             {
-                isLoggedIn?<h2>hii</h2>:<AdminLogin/>
+                isLoggedIn ?
+                    <Dashboard />
+                    : <AdminLogin />
             }
-        </div>
+        </>
     )
 }
 export default AdminBody

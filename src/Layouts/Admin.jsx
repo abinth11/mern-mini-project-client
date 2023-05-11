@@ -1,14 +1,15 @@
 
-import AdminHeader from '../components/admin/Header';
-import AdminFooter from '../components/admin/Footer';
+import AdminHeader from '../components/admin/partials/Header';
+import AdminFooter from '../components/admin/partials/Footer';
 import AdminLogin from '../components/admin/Login';
+import { Provider } from 'react-redux';
 import store from '../features/store';
+import { Outlet } from 'react-router-dom';
 const AdminLayout = () => {
-    const isLoggedIn=false
     // const isLoggedIn = useSelector((state) => state);
     return (
       <Provider store={store}>
-        {console.log(store)}
+        {/* {console.log(store)}
         {
           isLoggedIn ?
             <>
@@ -17,7 +18,8 @@ const AdminLayout = () => {
               <AdminFooter />
             </>
             : <Outlet />
-        }
+        } */}
+        <Outlet/>
       </Provider>
     )
   }

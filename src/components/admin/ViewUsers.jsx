@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import AdminHeader from './partials/Header';
+import AdminFooter from './partials/Footer';
 import './UserList.css';
+import { Link } from 'react-router-dom';
 
 const users = [
   {
@@ -15,6 +18,9 @@ const users = [
 
 const UserList = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  useEffect(()=>{
+    // fetch('')
+  })
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -35,7 +41,9 @@ const UserList = () => {
   };
 
   return (
-    <div className="user-list-container">
+    <>
+    <AdminHeader/>
+     <div className="user-list-container">
       <div className="search-bar">
         <input
           type="text"
@@ -70,8 +78,9 @@ const UserList = () => {
               <td>{user.createdAt}</td>
               <td>
                 <div className="actions">
-                  <button onClick={() => handleEdit(user.id)}>Edit</button>
-                  <button onClick={() => handleDelete(user.id)}>Delete</button>
+                  <button className='edit-button'><Link className='edit-link' to='/admin/edit-user'>Edit</Link></button>
+                  {/* <button onClick={() => handleEdit(user.id)}>Edit</button> */}
+                  <button className='delete-button' onClick={() => handleDelete(user.id)}>Delete</button>
                 </div>
               </td>
             </tr>
@@ -79,6 +88,9 @@ const UserList = () => {
         </tbody>
       </table>
     </div>
+    <AdminFooter/>
+    </>
+   
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './EditUser.css';
-
+import AdminHeader from './partials/Header';
+import AdminFooter from './partials/Footer';
 const EditUser = ({ user, onUpdate }) => {
   const [name, setName] = useState(user.name);
   const [mobile, setMobile] = useState(user.mobile);
@@ -38,7 +39,9 @@ const EditUser = ({ user, onUpdate }) => {
   };
 
   return (
-    <div className="edit-user-container">
+    <>
+    <AdminHeader/>
+     <div className="edit-user-container">
       <h2 className="edit-user-heading">Edit User</h2>
       <div className="edit-user-info">
         <div className="edit-user-label">Name:</div>
@@ -99,6 +102,9 @@ const EditUser = ({ user, onUpdate }) => {
       </button>
       </div>
     </div>
+    <AdminFooter/>
+    </>
+   
   );
 };
 

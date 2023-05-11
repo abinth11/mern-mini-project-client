@@ -1,0 +1,72 @@
+/* Header.css */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  .header-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .header-nav ul {
+    list-style: none;
+    display: flex;
+    margin-right: 180px;
+    padding-top: 18px;
+    align-items: center;
+  }
+  .header-nav ul li{
+    margin-left: 40px;
+  }
+  .header-nav ul li:hover{
+    cursor: pointer;
+  }
+  
+  .header-nav ul li:not(:last-child) {
+    margin-right: 20px;
+  }
+  
+  .header-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .dropdown-toggle {
+    background: none;
+    border: none;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    list-style: none;
+  }
+  
+  .dropdown-menu li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  
+  .logout-button {
+    background-color: #ff5252;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Add additional styles as needed */
+  
