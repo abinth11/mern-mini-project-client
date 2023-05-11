@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Menu, MenuItem } from '@mui/material';
 import { FiUser } from 'react-icons/fi';
-import { clearToken } from '../../features/authSlice';
+import { clearToken } from '../../../features/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 

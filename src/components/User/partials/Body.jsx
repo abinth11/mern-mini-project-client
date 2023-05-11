@@ -1,10 +1,10 @@
 import React,{useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
-import RestaurantCard from './Restaurants/RestaurantCard';
-import ShimmerEffect from './shimmer';
+import RestaurantCard from '../Restaurants/RestaurantCard';
+import ShimmerEffect from '../others/shimmer';
 import { useSelector, useDispatch } from 'react-redux';
-import { setRestaurants } from '../features/restaurants';
-import {setFilteredRestaurants} from '../features/filteredRestaurants';
+import { setRestaurants } from '../../../features/restaurants';
+import {setFilteredRestaurants} from '../../../features/filteredRestaurants';
 const Body = () => {
   useEffect(() => {
     getRestaurants()

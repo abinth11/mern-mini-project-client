@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import "./Login.css";
-import { setToken } from "../../features/authSlice";
+import './Login.css'
 
-const Login = () => {
+const AdminLogin = () => {
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [err, showErr] = useState(true)
     const [errMsg, setErrMsg] = useState()
     const navigate = useNavigate()
-    const dispatch = useDispatch();
     useEffect(() => {
         if (err) {
             var timerId = setTimeout(() => {
@@ -98,4 +95,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AdminLogin;

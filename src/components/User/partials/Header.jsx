@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { logoImageUrl } from "../constants";
-import filterData from "../Helpers/filterAlgorithm";
+import { logoImageUrl } from "../../../constants";
+import filterData from "../../../Helpers/filterAlgorithm";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilteredRestaurants } from '../features/filteredRestaurants';
+import { setFilteredRestaurants } from '../../../features/filteredRestaurants';
 import { Link } from "react-router-dom";
-import UserProfile from "./Profile/userProfile";
+import UserProfile from "../Profile/userProfile";
 const logo = (
   <div className="logo">
     <img src={logoImageUrl} alt="logo" />

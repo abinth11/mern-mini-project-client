@@ -1,6 +1,6 @@
 import React from "react"
-import { menuItemImageUrl } from "../../constants.js"
-import { formatMoneyINR } from "../../Helpers/helperFunctions.js";
+import { menuItemImageUrl } from "../../../constants"
+import { formatMoneyINR } from "../../../Helpers/helperFunctions";
 const RestaurantMenu = ({menuItem}) =>{
     return (
         <>
