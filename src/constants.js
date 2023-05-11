@@ -1921,4 +1921,6 @@ export const restaurantData = [
 export const logoImageUrl = 'https://res.cloudinary.com/dwucedjmy/image/upload/v1682660264/fresh-bite-high-resolution-logo-black-on-transparent-background_nclacl.png'
 export const restaurantImageUrl = 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill' 
 export const menuItemImageUrl = 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/'
+
+
       

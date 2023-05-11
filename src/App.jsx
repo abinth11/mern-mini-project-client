@@ -1,14 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Header from './components/user/partials/Header';
 import Body from './components/user/partials/Body';
-import Footer from './components/user/partials/Footer';
 import {
   RouterProvider,
   createBrowserRouter,
-  Outlet,
 } from 'react-router-dom';
-import { configureStore } from '@reduxjs/toolkit';
 import ErrorElement from './components/user/others/ErrorElement';
 import About from './components/user/Offers';
 import Contact from './components/user/Help';
@@ -16,46 +12,13 @@ import Cart from './components/user/Cart';
 import Login from './components/user/Login/SignIn';
 import SignUp from './components/user/Login/SignUp';
 import ViewRestaurant from './components/user/Restaurants/ViewRestaurant';
-import restaurantReducer from './features/restaurants.js'
-import filteredRestaurantReducer from './features/filteredRestaurants'
 import ViewProfile from './components/user/Profile/viewProfile';
-import { Provider } from 'react-redux';
-import authReducer from './features/authSlice';
 import AdminBody from './components/admin/Body';
-import AdminHeader from './components/admin/Header';
-import AdminFooter from './components/admin/Footer';
-import AdminLogin from './components/admin/Login';
-import ViewUsers from './components/admin/ViewUsers';
+import UserList from './components/admin/ViewUsers';
+import EditUser from './components/admin/EditUser';
+import UserLayout from './Layouts/User';
+import AdminLayout from './Layouts/Admin';
 
-const store = configureStore({
-  reducer: {
-    restaurantReducer,
-    filteredRestaurantReducer,
-    authReducer
-  }
-})
-const UserLayout = () => {
-  return (
-    <>
-      <Provider store={store}>
-        <Header />
-        <Outlet />
-        <Footer />
-      </Provider>
-    </>
-  )
-}
-const AdminLayout = () => {
-  return (
-    <>
-      <Provider store={store}>
-        <AdminHeader />
-        <Outlet />
-        <AdminFooter />
-      </Provider>
-    </>
-  )
-}
 const AppRouter = createBrowserRouter([{
   path: '/',
   element: <UserLayout />,
@@ -105,8 +68,19 @@ const AppRouter = createBrowserRouter([{
     },
     {
       path: 'view-users',
-      element: <ViewUsers />
+      element: <UserList />
     },
+    {
+      path:'edit-user',
+      element:<EditUser user={{
+        name: 'Nikhil',
+        mobile: '9072175118',
+        email: 'abin@gmail.com',
+        blocked: false,
+        createdAt: '2023-05-07T10:44:36.548+0000',
+        photo: 'https://res.cloudinary.com/dwucedjmy/image/upload/v1683790677/profile.png',
+      }}/>
+    }
   ]
 }])
 const root = ReactDOM.createRoot(document.getElementById('root'));

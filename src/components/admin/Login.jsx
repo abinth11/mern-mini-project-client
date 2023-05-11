@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import { setLoggedIn } from "../../features/adminLogin";
+import {useDispatch} from 'react-redux'
 import './Login.css'
 
 const AdminLogin = () => {
@@ -10,6 +12,7 @@ const AdminLogin = () => {
     const [err, showErr] = useState(true)
     const [errMsg, setErrMsg] = useState()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     useEffect(() => {
         if (err) {
             var timerId = setTimeout(() => {
@@ -32,22 +35,22 @@ const AdminLogin = () => {
             username,
             password
         }
-        fetch('http://localhost:3000/user-login', {
+        fetch('http://localhost:3000/admin/login', {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(async response => {
-            const parsedResponse = await response.json()
-            const { data } = parsedResponse
-            if (!data?.status) {
-                setErrMsg(data?.Message)
+        }).then(async result => {
+            const parsedResponse = await result.json()
+            const { response } = parsedResponse
+            if (!response?.status) {
+                setErrMsg(response?.message)
                 showErr(true)
             } else {
-                dispatch(setToken(data?.accessToken))
-                localStorage.setItem('accessToken',data?.accessToken)
-                navigate('/')
+                localStorage.setItem('accessTokenAdmin',response?.accessToken)
+                dispatch(setLoggedIn())
+                navigate('/admin')
             }
             console.log(parsedResponse)
         }).catch(err => {
