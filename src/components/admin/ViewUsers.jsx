@@ -4,14 +4,41 @@ import AdminFooter from './partials/Footer';
 import './UserList.css';
 import { Link } from 'react-router-dom';
 import { filterUsers } from '../../Helpers/filterAlgorithm';
+import jwt from 'jsonwebtoken'
+import { useDispatch,useSelector } from 'react-redux';
+import { setModalClose, setModalOpen } from '../../features/expiration';
 
 const UserList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState([])
   const [filteredUsers, setFilteredUsers] = useState([])
   const [isDeleted, setIsDeleted] = useState(false)
+  const dispatch = useDispatch()
+  const isModalOpens = useSelector((state) => state?.setModalReducer?.isModalOpen);
+  
+  // const isModalOpens = true
   useEffect(() => {
-    fetch('http://localhost:3000/admin/get-user-details')
+    const token = localStorage.getItem('accessTokenAdmin')
+    const decodedToken = jwt.decode(token);
+    console.log(decodedToken)
+    if (decodedToken) {
+      const expirationDate = new Date(decodedToken.exp * 1000);
+      const currentDate = new Date();
+    
+      if (currentDate > expirationDate) {
+        dispatch(setModalOpen())
+        console.log('Token has expired',isModalOpens);
+      } else {
+        console.log('Token is still valid');
+      }
+    } else {
+      console.log('Invalid token');
+    }
+    fetch('http://localhost:3000/admin/get-user-details',{
+      headers:{
+        authorization:token
+      }
+    })
       .then(async response => {
         const parsedResponse = await response.json()
         const { data } = parsedResponse
@@ -44,10 +71,12 @@ const UserList = () => {
     const userData = {
       id:userId
     }
+    const token = localStorage.getItem('accessTokenAdmin')
     fetch('http://localhost:3000/admin/delete-user',{
       method: "DELETE",
       body: JSON.stringify(userData),
       headers: {
+          'authorization':token,
           'Content-Type': 'application/json'
       }  
     }).then(async response=>{
@@ -56,7 +85,7 @@ const UserList = () => {
         setIsDeleted(true)
         alert(parsedResponse.successMessage)
       } else {
-        alert(parsedResponse?.errorMessage)
+        alert('failed to delete the user')
       }
     }).catch(error=>{
       console.log(error)
@@ -89,8 +118,8 @@ const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.length > 0 ? (
-              filteredUsers.map((user, index) => (
+            {filteredUsers?.length > 0 ? (
+              filteredUsers?.map((user, index) => (
                 <tr key={index}>
                   <td>
                     <div className="user-info">

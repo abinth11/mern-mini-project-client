@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {logoImageUrl} from '../../../constants'
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const logo = (
@@ -10,6 +11,7 @@ const logo = (
   );
 const AdminHeader = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate()
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -17,7 +19,10 @@ const AdminHeader = () => {
 
   const handleLogout = () => {
     // Implement your logout functionality here
+    localStorage.removeItem('accessTokenAdmin')
     console.log('Logging out...');
+    navigate('/admin')
+    location.reload()
   };
 
   return (
@@ -35,7 +40,7 @@ const AdminHeader = () => {
             <Link to="/profile">Profile</Link>
           </li> */}
           <li>
-            <Link to="/logout">Logout</Link>
+            <Link to="/admin" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
         {/* <div className="header-dropdown">

@@ -14,9 +14,11 @@ const EditUser = () => {
   // const [photo, setPhoto] = useState('image');
   const { userId } = useParams()
   useEffect(() => {
+    const token = localStorage.getItem('accessTokenAdmin')
     fetch(`http://localhost:3000/admin/get-individual-user-data?userId=${userId}`, {
       method: "GET",
       headers: {
+        'authorization':token,
         'Content-Type': 'application/json'
       }
     }).then(async response => {
@@ -73,10 +75,12 @@ const EditUser = () => {
       email,
       blocked,
     }
+    const token = localStorage.getItem('accessTokenAdmin')
     fetch('http://localhost:3000/admin/update-user-info', {
       method: "PUT",
       body:JSON.stringify(formData),
       headers: {
+        'authorization':token,
         'Content-Type': 'application/json'
       }
     }).then(async response => {

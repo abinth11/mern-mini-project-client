@@ -50,7 +50,8 @@ const AdminLogin = () => {
             } else {
                 localStorage.setItem('accessTokenAdmin',response?.accessToken)
                 dispatch(setLoggedIn())
-                navigate('/admin')
+                // navigate('/admin')
+                location.reload()
             }
             console.log(parsedResponse)
         }).catch(err => {

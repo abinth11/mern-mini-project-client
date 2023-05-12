@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useNavigate,Link } from "react-router-dom";
 
@@ -12,6 +12,8 @@ const SignUp = () => {
     const [mobile, setMobile] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [error,setError] = useState(false)
+    const [errorMessage,setErrorMessage]=useState('')
     const navigate = useNavigate()
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -20,6 +22,17 @@ const SignUp = () => {
     const handleShowConfirmPassword = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
+    useEffect(() => {
+        if (error) {
+            var timerId = setTimeout(() => {
+                setError(false);
+                setErrorMessage('');
+            }, 5000);
+        }
+        return () => {
+            clearTimeout(timerId)
+        }
+    }, [error]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,10 +43,11 @@ const SignUp = () => {
             password,
             confirmPassword
         }
-        // if (formData.password !== formData.confirmPassword) {
-        //     alert('Passwords do not match');
-        //     return;
-        // }
+        if (formData.password !== formData.confirmPassword) {
+            setError(true);
+            setErrorMessage('Password does not match');
+            return;
+        }
 
         fetch('http://localhost:3000/user-register', {
             method: 'POST',
@@ -47,10 +61,12 @@ const SignUp = () => {
             console.log(parsedResponse)
             const {data} = parsedResponse
             if(data.status){
-                alert('response is ok')
-                navigate('/')
+                alert('successfully registered')
+                // navigate('/')
             } else {
-                alert('unable to register')
+                // alert('unable to register')
+                setError(true)
+                setErrorMessage(data?.Message)
             }
           })
           .then(data => {
@@ -63,8 +79,11 @@ const SignUp = () => {
     };
 
     return (
-        <div className="signup-form-container" style={{ margin: "80px 500px 100px 500px" }}>
+        <div className="signup-form-container" style={{ margin: "95px 500px 100px 500px" }}>
             <h2 style={{ textAlign: 'center' }}>Sign Up</h2>
+            <div className="notification">
+                <p className={error ? 'error' : ''}>{errorMessage}</p>
+            </div>
             <form onSubmit={handleSubmit} className="signup-form">
                 <div className="form-control">
                     <label htmlFor="name">Name</label>
@@ -115,6 +134,7 @@ const SignUp = () => {
                     </div>
                 </div>
                 <div className="form-actions">
+                <button type="submit">Submit</button>
                 <p className="signup-link">Already have an account? <Link to="/login">Log in</Link></p>
                 </div>
             </form>

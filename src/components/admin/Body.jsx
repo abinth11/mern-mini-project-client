@@ -6,7 +6,8 @@ const AdminBody = () => {
     // const [isLoggedIn,setIsLoggedIn] = useState(false)
     // const isLoggedIn = useSelector((state) => state?.adminLoggedInReducer?.isLoggedIn);
     // console.log(isLoggedIn)
-    const isLoggedIn = true
+    const token = localStorage.getItem('accessTokenAdmin')
+    const isLoggedIn = token?true:false
     return (
         <>
             {
