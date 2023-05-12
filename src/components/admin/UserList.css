@@ -92,3 +92,8 @@
   .delete-button:hover{
     background-color: #b40f0f;
   }
+  .no-results {
+    text-align: center;
+    padding: 10px;
+  }
+  
