@@ -9,6 +9,7 @@ const UserList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState([])
   const [filteredUsers, setFilteredUsers] = useState([])
+  const [isDeleted, setIsDeleted] = useState(false)
   useEffect(() => {
     fetch('http://localhost:3000/admin/get-user-details')
       .then(async response => {
@@ -20,7 +21,7 @@ const UserList = () => {
       .catch(error => {
         console.log(error)
       })
-  }, [])
+  }, [isDeleted])
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -40,17 +41,26 @@ const UserList = () => {
 
   const handleDelete = (userId) => {
     // Handle delete action
+    const userData = {
+      id:userId
+    }
     fetch('http://localhost:3000/admin/delete-user',{
       method: "DELETE",
-      body: JSON.stringify(userId),
+      body: JSON.stringify(userData),
       headers: {
           'Content-Type': 'application/json'
       }  
     }).then(async response=>{
       const parsedResponse = await response.json()
-      console.log(parsedResponse)
+      if(parsedResponse.status){
+        setIsDeleted(true)
+        alert(parsedResponse.successMessage)
+      } else {
+        alert(parsedResponse?.errorMessage)
+      }
     }).catch(error=>{
       console.log(error)
+      alert(error)
     })
     console.log('Delete user with ID:', userId);
   };
@@ -84,7 +94,7 @@ const UserList = () => {
                 <tr key={index}>
                   <td>
                     <div className="user-info">
-                      <img className="user-photo" src={user.photo} alt="User" />
+                      <img className="user-photo" src={user.photo??'https://res.cloudinary.com/dwucedjmy/image/upload/v1681709064/rojcd14ychu49eukhjuk.png'} alt="User" />
                       <span className="user-name">{user.name}</span>
                     </div>
                   </td>
