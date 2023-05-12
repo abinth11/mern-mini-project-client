@@ -71,15 +71,8 @@ const AppRouter = createBrowserRouter([{
       element: <UserList />
     },
     {
-      path:'edit-user',
-      element:<EditUser user={{
-        name: 'Nikhil',
-        mobile: '9072175118',
-        email: 'abin@gmail.com',
-        blocked: false,
-        createdAt: '2023-05-07T10:44:36.548+0000',
-        photo: 'https://res.cloudinary.com/dwucedjmy/image/upload/v1683790677/profile.png',
-      }}/>
+      path:'edit-user/:userId',
+      element:<EditUser/>
     }
   ]
 }])

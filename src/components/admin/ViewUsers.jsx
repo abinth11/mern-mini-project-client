@@ -98,18 +98,18 @@ const UserList = () => {
                       <span className="user-name">{user.name}</span>
                     </div>
                   </td>
-                  <td>{user.mobile}</td>
-                  <td>{user.email}</td>
-                  <td>{user.blocked ? 'Blocked' : 'Not Blocked'}</td>
-                  <td>{user.createdAt}</td>
+                  <td>{user?.mobile}</td>
+                  <td>{user?.email}</td>
+                  <td>{user?.blocked ? 'Blocked' : 'Not Blocked'}</td>
+                  <td>{user?.createdAt}</td>
                   <td>
                     <div className="actions">
                       <button className="edit-button">
-                        <Link className="edit-link" to="/admin/edit-user">
+                        <Link className="edit-link" to={`/admin/edit-user/${user?._id}`}>
                           Edit
                         </Link>
                       </button>
-                      <button className="delete-button" onClick={() => handleDelete(user._id)}>
+                      <button className="delete-button" onClick={() => handleDelete(user?._id)}>
                         Delete
                       </button>
                     </div>
