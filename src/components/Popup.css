@@ -1,4 +1,4 @@
-body {
+/* body {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -50,4 +50,4 @@ body.modal-open {
 .modal-button.cancel {
   background-color: #f8f9fa;
   color: #000;
-}
+} */
