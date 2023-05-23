@@ -53,7 +53,7 @@ function Footer() {
               <FaPhoneAlt /> +1 123-456-7890
             </li>
             <li>
-              <GrMail /> contact@fooddeliveryapp.com
+              <GrMail /> contact@freshbite.com
             </li>
             <li>123 Main Street</li>
             <li>Anytown, USA 12345</li>

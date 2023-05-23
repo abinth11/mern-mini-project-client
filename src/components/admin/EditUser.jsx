@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './EditUser.css';
 import AdminHeader from './partials/Header';
 import AdminFooter from './partials/Footer';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 const EditUser = () => {
   const [_id,setId] = useState('id')
   const [name, setName] = useState('name');
@@ -13,6 +13,7 @@ const EditUser = () => {
   // const [createdAt, setCreatedAt] = useState('data');
   // const [photo, setPhoto] = useState('image');
   const { userId } = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
     const token = localStorage.getItem('accessTokenAdmin')
     fetch(`http://localhost:3000/admin/get-individual-user-data?userId=${userId}`, {
@@ -88,6 +89,7 @@ const EditUser = () => {
       if (parsedResponse.status) {
         alert(parsedResponse?.successMessage)
         setIsUpdated(true)
+        navigate('/admin/view-users')
         
       } else {
         alert(parsedResponse?.errorMessage)

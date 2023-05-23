@@ -21,7 +21,7 @@ const UserProfile = () => {
   const handleLogOut = () => {
     // const result = dispatch(clearToken())
     localStorage.removeItem('accessToken')
-    // navigate('/')
+    navigate('/')
     location.reload()
   }
 

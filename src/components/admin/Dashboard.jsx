@@ -25,7 +25,6 @@ const Dashboard = () => {
       <div className="admin-dash">
         <h2>Hello welcome to admin dashboard...!</h2>
         <div>
-          <h1>Your App</h1>
           {/* <button onClick={handleSessionExpiration}>Simulate Session Expiration</button> */}
           <SessionExpiredModal />
         </div>

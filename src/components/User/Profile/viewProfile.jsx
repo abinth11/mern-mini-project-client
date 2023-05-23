@@ -59,6 +59,7 @@ const ViewProfile = () => {
 
     const handleUpload = () => {
         // Simulating upload progress
+        // console.log(profilePhoto)
         if (profilePhoto == "") {
             alert('please select a photo')
             return

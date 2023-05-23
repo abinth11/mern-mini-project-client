@@ -39,7 +39,7 @@ const AdminLogin = () => {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
         }).then(async result => {
             const parsedResponse = await result.json()
@@ -59,7 +59,6 @@ const AdminLogin = () => {
             setErrMsg("Something went wrong")
             showErr(true)
         })
-
     }
     return (
         <div className="login-form-container">
