@@ -1,5 +1,6 @@
 
 const filterData = (searchText,restaurants,dispatch,setFilteredRestaurants) => {
+  console.log('filter data called')
     const filteredData = restaurants.filter((item) => {
       return item.data.name.toLowerCase().trim().includes(searchText.toLowerCase().trim())
     })
